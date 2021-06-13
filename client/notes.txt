@@ -1,0 +1,2 @@
+1 - when using create-react app, can simply use ./ as directory
+2 - geberally, bext to delete all contents of src and just use what you need (refer to app.js and index.js for template)

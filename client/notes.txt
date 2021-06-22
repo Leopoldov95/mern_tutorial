@@ -1,3 +1,5 @@
 1 - when using create-react app, can simply use ./ as directory
 2 - geberally, bext to delete all contents of src and just use what you need (refer to app.js and index.js for template)
 3 - So how MERN stack works, the client side updates the database, then the server side code reads from the database and executes
+4 - so in order for the client side to use the mongoDB data, must run server FIRST before running client
+5 - when running server, make sure no console.log()'s are in use otherwise base64 img will crash console/app

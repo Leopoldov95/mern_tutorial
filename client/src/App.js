@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
@@ -7,13 +7,17 @@ import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 import memories from "./img/memories.png";
 import useStyles from "./styles";
+
+// POST ID has to be managed here as App.js is the oarent component to both Post and Form components
 const App = () => {
+  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  // fire the disptach whenever the id changes, which happens after editing a post
   useEffect(() => {
     dispatch(getPosts());
-  }, []);
+  }, [currentId, dispatch]);
   return (
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
@@ -36,10 +40,10 @@ const App = () => {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>

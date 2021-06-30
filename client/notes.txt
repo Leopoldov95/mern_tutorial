@@ -3,3 +3,4 @@
 3 - So how MERN stack works, the client side updates the database, then the server side code reads from the database and executes
 4 - so in order for the client side to use the mongoDB data, must run server FIRST before running client
 5 - when running server, make sure no console.log()'s are in use otherwise base64 img will crash console/app
+6 - better to use console.log(error) over console.log(error.message)

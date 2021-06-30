@@ -25,26 +25,31 @@ export const createPost = async (req, res) => {
   }
 };
 
-
-export const updatePost = async (req,res) =>  {
+export const updatePost = async (req, res) => {
   // when destructuring, we can rename our properties such as { id:_id }
-  const {id: _id} = req.params;
-const post = req.body
-  if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No post with that ID");
+  const { id: _id } = req.params;
+  const post = req.body;
+  if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send("No post with that ID");
 
   // update post if id is valid
   //{...post, _id}
- const updatedPost = await PostMessage.
- findByIdAndUpdate(_id,{...post, _id}, {new: true} )
+  const updatedPost = await PostMessage.findByIdAndUpdate(
+    _id,
+    { ...post, _id },
+    { new: true }
+  );
 
- res.json(updatedPost);
-}
+  res.json(updatedPost);
+};
 
-export const deletePost = async (req,res) => {
-  const {id} = req.params;
-  if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No post with that ID");
+export const deletePost = async (req, res) => {
+  const { id } = req.params;
+  // checks if id is valid
+  if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send("No post with that ID");
 
   await PostMessage.findByIdAndRemove(id);
 
-  res.json({message: 'Post Deleted Successfully'})
-}
+  res.json({ message: "Post Deleted Successfully" });
+};

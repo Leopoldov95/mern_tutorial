@@ -16,32 +16,34 @@ function Form({ currentId, setCurrentId }) {
     selectedFile: "",
   });
   // using redux
-  const post = useSelector((state) => currentId ? state.posts.find(p => p._id === currentId) : null);
+  const post = useSelector((state) =>
+    currentId ? state.posts.find((p) => p._id === currentId) : null
+  );
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  useEffect(()=> {
-    if(post) setPostdata(post)
-  },[post])
+  useEffect(() => {
+    if (post) setPostdata(post);
+  }, [post]);
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (currentId) {
       dispatch(updatePost(currentId, postData));
     } else {
-        dispatch(createPost(postData));
+      dispatch(createPost(postData));
     }
-    clear()
-
-  
+    clear();
   };
   const clear = () => {
     setCurrentId(null);
-    setPostdata({  creator: "",
-    title: "",
-    message: "",
-    tags: "",
-    selectedFile: ""})
+    setPostdata({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      selectedFile: "",
+    });
   };
   return (
     <Paper className={classes.paper}>
@@ -51,7 +53,9 @@ function Form({ currentId, setCurrentId }) {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
+        <Typography variant="h6">
+          {currentId ? "Editing" : "Creating"} a Memory
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"
@@ -90,7 +94,9 @@ function Form({ currentId, setCurrentId }) {
           fullWidth
           value={postData.tags}
           /* using ...postData so as to not overwrite everytime a creaotr is created */
-          onChange={(e) => setPostdata({ ...postData, tags: e.target.value })}
+          onChange={(e) =>
+            setPostdata({ ...postData, tags: e.target.value.split(",") })
+          }
         />
 
         <div className={classes.fileInput}>

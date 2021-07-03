@@ -5,3 +5,4 @@ FULL CIRCLE STACK REQUEST
 - do not immedtaley uplad to gh
 - heroku only needs .env file CONNECTION_URL
 - heroku needs .env file
+- so we ONLY push the db to heroku (rewatch video if I need to change the deploy server settiings)

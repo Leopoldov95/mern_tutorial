@@ -1,2 +1,7 @@
 FULL CIRCLE STACK REQUEST
 - first, declare the router 
+
+// pushing project online
+- do not immedtaley uplad to gh
+- heroku only needs .env file CONNECTION_URL
+- heroku needs .env file

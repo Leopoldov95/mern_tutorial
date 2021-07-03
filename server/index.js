@@ -17,9 +17,9 @@ app.use(cors());
 // a route in postsRoutes with get "travel" therefore must be reached by visiting "posts/tarvel"
 app.use("/posts", postsRoutes);
 
-// mongodb cloud atlas - credentials must be safely stored before production
-//const CONNECTION_URL =
-("mongodb+srv://cycle_admin:Admin@Leov95@cluster0.n9jii.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+app.get("/", (req, res) => {
+  req.send("Hello to memories API");
+});
 const PORT = process.env.PORT || 5000;
 
 mongoose

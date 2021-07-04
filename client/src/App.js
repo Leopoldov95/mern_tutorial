@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
+import Auth from "./components/Auth/Auth"
 
 // POST ID has to be managed here as App.js is the oarent component to both Post and Form components
 const App = () => {
@@ -13,7 +14,8 @@ const App = () => {
       <Container maxWidth="lg">
         <Navbar />
         <Switch>
-          <Home />
+          <Route path="/" exact component={Home} />
+          <Route path="/auth" exact component={Auth} /> 
         </Switch>
       </Container>
     </BrowserRouter>

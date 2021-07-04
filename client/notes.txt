@@ -5,3 +5,4 @@
 5 - when running server, make sure no console.log()'s are in use otherwise base64 img will crash console/app
 6 - better to use console.log(error) over console.log(error.message)
 -  remember to change api url once server side has been uploaded to heroku
+- can use state tomange auth page, switch between login and signup

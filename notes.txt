@@ -3,7 +3,10 @@ FULL CIRCLE STACK REQUEST
 
 // pushing project online
 - do not immedtaley uplad to gh
-- recall we need dotenv to get .env to work
+- recall we need dotenv to get .env to work for heroku, only ignore node_modules
+- DO NOT PUSH PERSONAL .env TO GITHUB
+- need to install dotenv!!! 
+- need Procfile that tells heroku how to run server
 - okay to ignore .env for public github HOWEVER we need .env for heroku api deployment
 - heroku only needs .env file CONNECTION_URL
 - heroku needs .env file

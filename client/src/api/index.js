@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // so by using this url, we can use the backend logic
-const url = `https://memories-mern-lesson.herokuapp.com/posts`;
+//const url = `https://memories-mern-lesson.herokuapp.com/posts`;
+const url = "http://localhost:5000/posts";
 
 export const fetchPosts = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);

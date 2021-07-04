@@ -9,10 +9,14 @@ import Home from "./components/Home/Home";
 // POST ID has to be managed here as App.js is the oarent component to both Post and Form components
 const App = () => {
   return (
-    <Container maxWidth="lg">
-      <Navbar />
-      <Home />
-    </Container>
+    <BrowserRouter>
+      <Container maxWidth="lg">
+        <Navbar />
+        <Switch>
+          <Home />
+        </Switch>
+      </Container>
+    </BrowserRouter>
   );
 };
 

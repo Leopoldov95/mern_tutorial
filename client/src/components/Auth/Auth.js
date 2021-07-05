@@ -10,13 +10,19 @@ import {
 } from "@material-ui/core";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Icon from "./Icon";
 import useStyles from "./style";
 import Input from "./Input";
+import {signin, signup} from '../../actions/auth'
+
+const initialState = {firstName: '', lastName: '', email: '', password: '', confirmPassword: ''}
 
 const Auth = () => {
   const classes = useStyles();
+  const history = useHistory(); // initiates uesHistory
+  const [formData, setFormData] = useState(initialState)
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignUp] = useState(false);
   const dispatch = useDispatch();
@@ -32,6 +38,8 @@ const Auth = () => {
 
     try {
       dispatch({ type: "AUTH", data: { result, token } });
+      // redirect to home
+      history.push('/')
     } catch (error) {
       console.log(error);
     }
@@ -42,9 +50,21 @@ const Auth = () => {
     console.log("Google Sign in unsuccessfull, try again later.");
   };
 
-  const handleSubmit = () => {};
+  // use this to update the formData state upon clicking submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // check if user is signin or signed out
+    if(isSignup) {
+      dispatch(signup(formData, history))
+    } else {
+      dispatch(signin(formData, history))
+    }
+  };
 
-  const handleChange = () => {};
+  // use this to upate each indiviual state for the form
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value})
+  };
 
   const switchMode = () => {
     setIsSignUp((prevState) => !prevState);
@@ -71,7 +91,7 @@ const Auth = () => {
                   half
                 />
                 <Input
-                  name="firstName"
+                  name="lastName"
                   label="Last Name"
                   handleChange={handleChange}
                   half

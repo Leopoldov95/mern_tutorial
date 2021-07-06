@@ -6,3 +6,4 @@
 6 - better to use console.log(error) over console.log(error.message)
 -  remember to change api url once server side has been uploaded to heroku
 - can use state tomange auth page, switch between login and signup
+- no need to create my own uuid, mongodb takes care of id generattion (_id)

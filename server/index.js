@@ -19,7 +19,7 @@ app.use(cors());
 // the "/posts" here sets the base URL from this route. SO the route "/" within postsRoutes MUST be reached by visiting "/posts"
 // a route in postsRoutes with get "travel" therefore must be reached by visiting "posts/tarvel"
 app.use("/posts", postsRoutes);
-app.use('/user', userRoutes);
+app.use("/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello to memories API");

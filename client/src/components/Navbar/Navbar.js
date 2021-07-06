@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
+import decode from "jwt-decode";
 import { AppBar, Avatar, Typography, Toolbar, Button } from "@material-ui/core";
 import useStyles from "./styles";
 import memories from "../../img/memories.png";
@@ -9,24 +10,28 @@ const Navbar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
-  const history = useHistory()
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile'))); // profile is being access from local storage, shich was set in the reducer file auth.js
+  const history = useHistory();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile"))); // profile is being access from local storage, shich was set in the reducer file auth.js
   // this useEffect code updates/rerenders the component when  change is made to the location
-useEffect(() => {
-  const token = user?.token;
+  useEffect(() => {
+    const token = user?.token;
 
-  // JWT ...
+    // JWT ...
+    if (token) {
+      // decodes the token, checking if tken is expired. If so, user must sign back in
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
 
-
-  setUser(JSON.parse(localStorage.getItem('profile')))
-}, [location])
- // console.log(user)
- //logs the user out by setting the user state to null
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+  // console.log(user)
+  //logs the user out by setting the user state to null
   const logout = () => {
-    dispatch({ type: 'LOGOUT'})
-    history.push('/')
-    setUser(null)
-  }
+    dispatch({ type: "LOGOUT" });
+    history.push("/");
+    setUser(null);
+  };
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -64,7 +69,9 @@ useEffect(() => {
               className={classes.logout}
               color="secondary"
               onClick={logout}
-            >Logout</Button>
+            >
+              Logout
+            </Button>
           </div>
         ) : (
           <Button

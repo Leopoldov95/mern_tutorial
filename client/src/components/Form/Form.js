@@ -9,7 +9,6 @@ import { createPost, updatePost } from "../../actions/posts";
 
 function Form({ currentId, setCurrentId }) {
   const [postData, setPostdata] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -21,6 +20,7 @@ function Form({ currentId, setCurrentId }) {
   );
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (post) setPostdata(post);
@@ -29,22 +29,34 @@ function Form({ currentId, setCurrentId }) {
     e.preventDefault();
 
     if (currentId) {
-      dispatch(updatePost(currentId, postData));
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
     } else {
-      dispatch(createPost(postData));
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
     clear();
   };
   const clear = () => {
     setCurrentId(null);
     setPostdata({
-      creator: "",
       title: "",
       message: "",
       tags: "",
       selectedFile: "",
     });
   };
+
+  // if no user is logged in
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to create your own posts and like other posts.
+        </Typography>
+      </Paper>
+    );
+  }
   return (
     <Paper className={classes.paper}>
       <form
@@ -56,17 +68,7 @@ function Form({ currentId, setCurrentId }) {
         <Typography variant="h6">
           {currentId ? "Editing" : "Creating"} a Memory
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          /* using ...postData so as to not overwrite everytime a creaotr is created */
-          onChange={(e) =>
-            setPostdata({ ...postData, creator: e.target.value })
-          }
-        />
+
         <TextField
           name="title"
           variant="outlined"

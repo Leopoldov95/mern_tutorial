@@ -17,6 +17,19 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// tesing
+/* async function testPosts(url) {
+  const res = await axios.get(url);
+  console.log(res);
+}
+
+async function testAPI() {
+  const res = await API.get("/posts");
+  console.log(res);
+}
+//testPosts("https://memories-mern-lesson.herokuapp.com/posts");
+testAPI(); */
+
 // so by using this url, we can use the backend logic
 //const url = `https://memories-mern-lesson.herokuapp.com/posts`;
 //const url = "/posts";

@@ -24,6 +24,7 @@ function Post({ post, setCurrentId }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
+  console.log(user);
   // problem with likes
   // 1 like, 2 likes...
   //console.log(post.likes.length);
@@ -69,8 +70,8 @@ function Post({ post, setCurrentId }) {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        {(user.result?.googleId === post?.creator ||
-          user?.result?._id == post?.creator) && (
+        {(user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator) && (
           <Button
             style={{ color: "white" }}
             size="small"
@@ -98,15 +99,13 @@ function Post({ post, setCurrentId }) {
           size="small"
           color="primary"
           disabled={!user?.result}
-          onClick={() => {
-            dispatch(likePost(post._id));
-          }}
+          onClick={() => dispatch(likePost(post._id))}
         >
           <Likes />
         </Button>
 
-        {(user.result?.googleId === post?.creator ||
-          user?.result?._id == post?.creator) && (
+        {(user?.result?.googleId === post?.creator ||
+          user?.result?._id === post?.creator) && (
           <Button
             size="small"
             color="primary"

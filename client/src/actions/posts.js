@@ -14,7 +14,7 @@ export const getPosts = () => async (dispatch) => {
     // have to use dispatch(), payload is the file to use/return
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 

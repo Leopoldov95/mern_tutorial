@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" }); // can set a base url here
+const API = axios.create({
+  baseURL: "https://memories-mern-lesson.herokuapp.com",
+}); // can set a base url here
 
 // this function will run on every request, it's helping the middleware function
 API.interceptors.request.use((req) => {

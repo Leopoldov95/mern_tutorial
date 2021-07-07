@@ -31,6 +31,7 @@ const Auth = () => {
   const [formData, setFormData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignUp] = useState(false);
+  // remember that using dispatch means that we are accessing state that is usable across our entire appplication
   const dispatch = useDispatch();
 
   //const isSignup = true;

@@ -6,11 +6,15 @@ import { AUTH, LOGOUT } from "../constants/actionTypes";
 const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {
     case AUTH:
-      localStorage.setItem('profile', JSON.stringify({...action?.data}))
-      return {...state, authData: action?.data};
+      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      console.log(state);
+      //console.log({ ...state, authData: action?.data });
+      //console.log(data);
+      // authData is the only toublseome one here, will need to set it as a parent state and pass it down to child states
+      return { ...state, authData: action?.data };
     case LOGOUT:
-      localStorage.clear() // clears the entire local storage, needed to remove user from localStorage
-      return {...state, authData: action?.data};
+      localStorage.clear(); // clears the entire local storage, needed to remove user from localStorage
+      return { ...state, authData: action?.data };
     default:
       return state;
       break;

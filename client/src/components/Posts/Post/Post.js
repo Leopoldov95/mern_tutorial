@@ -24,7 +24,7 @@ function Post({ post, setCurrentId }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(user);
+
   // problem with likes
   // 1 like, 2 likes...
   //console.log(post.likes.length);
